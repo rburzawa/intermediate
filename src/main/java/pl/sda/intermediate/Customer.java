@@ -11,6 +11,7 @@ public class Customer {
     private BigDecimal salary;
     private static Integer counter = 1;
 
+    //blok inicjalizujacy
     {
         this.id = counter++;
     }
@@ -25,4 +26,22 @@ public class Customer {
     public Customer(String name, String surname, int age, String salary) {
         this(name, surname, age, Integer.parseInt(salary));
     }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
 }
