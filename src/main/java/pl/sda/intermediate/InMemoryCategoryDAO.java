@@ -34,6 +34,21 @@ public class InMemoryCategoryDAO {
         List<String> lines = loadCategoriesFromFile();
         List<Category> categoryList = new ArrayList<>();
 
+        populateCategoriesList(lines, categoryList);
+
+        Map<Integer, List<Category>> categoriesMap = new HashMap<>();
+        for (Category category : categoryList) {
+            int depth = calculateDepth(category);
+            populateCategoriesMap(categoriesMap, category, depth);
+        }
+
+        populateParentId(categoriesMap, 0);
+
+        this.categories = categoryList;
+
+    }
+
+    private void populateCategoriesList(List<String> lines, List<Category> categoryList) {
         for (int i = 1; i <= lines.size(); i++) {
 
             categoryList.add(Category
@@ -42,29 +57,27 @@ public class InMemoryCategoryDAO {
                     .name(lines.get(i - 1))
                     .build());
         }
+    }
 
-        Map<Integer, List<Category>> categoriesMap = new HashMap<>();
-        for (Category category : categoryList) {
-            int depth;
-            if (category.getName().startsWith(" ")) {
-                String[] split = category.getName().split("\\S");
-                depth = split[0].length();
-            } else {
-                depth = 0;
-            }
-            if (categoriesMap.containsKey(depth)) {
-                categoriesMap.get(depth).add(category);
-            } else {
-                List<Category> innerList = new ArrayList<>();
-                innerList.add(category);
-                categoriesMap.put(depth, innerList);
-            }
+    private void populateCategoriesMap(Map<Integer, List<Category>> categoriesMap, Category category, int depth) {
+        if (categoriesMap.containsKey(depth)) {
+            categoriesMap.get(depth).add(category);
+        } else {
+            List<Category> innerList = new ArrayList<>();
+            innerList.add(category);
+            categoriesMap.put(depth, innerList);
         }
+    }
 
-        populateParentId(categoriesMap, 0);
-
-        this.categories = categoryList;
-
+    private int calculateDepth(Category category) {
+        int depth;
+        if (category.getName().startsWith(" ")) {
+            String[] split = category.getName().split("\\S");
+            depth = split[0].length();
+        } else {
+            depth = 0;
+        }
+        return depth;
     }
 
     private void populateParentId(Map<Integer, List<Category>> categoriesMap, int depth) {
