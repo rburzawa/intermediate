@@ -1,7 +1,7 @@
 package pl.sda.intermediate;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.sda.intermediate.customer.CustomerStatistics;
 
 import java.math.BigDecimal;
 import java.util.Map;
