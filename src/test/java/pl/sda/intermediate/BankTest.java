@@ -41,6 +41,9 @@ public class BankTest {
 
         System.out.println(Bank.counter);
         System.out.println(Bank.cash);
+        System.out.println();
+        System.out.println(Bank.atomicCounter);
+        System.out.println(Bank.atomicCash);
 
 
     }
