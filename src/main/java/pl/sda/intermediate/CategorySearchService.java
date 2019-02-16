@@ -24,7 +24,7 @@ public class CategorySearchService {
                             .orElse(null));
         }
         for (CategoryDTO categoryDTO : resultList) {
-            if (categoryDTO.getName().equals(input)) {
+            if (input != null && !input.trim().isEmpty() && categoryDTO.getName().equals(input.trim())) {
                 categoryDTO.getCategoryState().setOpen(true);
                 categoryDTO.getCategoryState().setSelected(true);
                 openParent(categoryDTO);
