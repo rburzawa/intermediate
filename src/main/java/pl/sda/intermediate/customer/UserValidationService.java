@@ -1,4 +1,4 @@
-package pl.sda.intermediate;
+package pl.sda.intermediate.customer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class UserValidationService {
         if (!dto.getBirthDate().matches("(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])")) {
             errorsMap.put("birthDateValRes", "Zły format. Data urodzin powinna być podana w formacie RRRR-MM-DD");
         }
-        if (!dto.getLogin().matches("^[\\w\\.]+@([A-Za-z0-9]+\\.){1,2}[A-Za-z]{2,4}$")) {
+        if (!dto.getEMail().matches("^[\\w\\.]+@([A-Za-z0-9]+\\.){1,2}[A-Za-z]{2,4}$")) {
             errorsMap.put("loginValRes", "Zły format adresu e-mail");
         }
         if (!dto.getPhone().matches("^(\\+[0-9]{1,3} )?([0-9]{9}|[0-9]{3}-[0-9]{3}-[0-9]{3})$")) {

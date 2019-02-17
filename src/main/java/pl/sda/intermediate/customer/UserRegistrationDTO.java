@@ -1,4 +1,4 @@
-package pl.sda.intermediate;
+package pl.sda.intermediate.customer;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ public class UserRegistrationDTO {
 
     private String firstName;
     private String lastName;
-    private String login;
+    private String eMail;
     private String birthDate;
     private String pesel;
     private String phone;

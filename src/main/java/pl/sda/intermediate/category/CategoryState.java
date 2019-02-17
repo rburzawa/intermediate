@@ -1,4 +1,4 @@
-package pl.sda.intermediate;
+package pl.sda.intermediate.category;
 
 import lombok.Getter;
 import lombok.Setter;

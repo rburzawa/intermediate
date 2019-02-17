@@ -1,6 +1,8 @@
 package pl.sda.intermediate;
 
 import org.junit.jupiter.api.Test;
+import pl.sda.intermediate.category.CategoryDTO;
+import pl.sda.intermediate.category.CategorySearchService;
 
 import java.util.List;
 

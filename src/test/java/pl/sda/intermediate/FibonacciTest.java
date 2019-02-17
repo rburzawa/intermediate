@@ -2,6 +2,7 @@ package pl.sda.intermediate;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.sda.intermediate.training.fibonacci.Fibonacci;
 
 public class FibonacciTest {
 

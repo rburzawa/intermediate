@@ -1,8 +1,7 @@
-package pl.sda.intermediate;
+package pl.sda.intermediate.category;
 
 import lombok.Getter;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;

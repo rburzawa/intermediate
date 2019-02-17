@@ -1,4 +1,4 @@
-package pl.sda.intermediate.runnable;
+package pl.sda.intermediate.training.runnable;
 
 public class MyRunnable implements Runnable {
     @Override

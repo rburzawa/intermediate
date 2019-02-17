@@ -1,25 +1,25 @@
-package pl.sda.intermediate;
+package pl.sda.intermediate.training.hashCode;
 
 import lombok.AllArgsConstructor;
 
 import java.util.Objects;
-import java.util.Random;
 
 @AllArgsConstructor
-public class CustomerRandomHashCode {
-
+public class CustomerConstantHashCode {
     private String name;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomerRandomHashCode that = (CustomerRandomHashCode) o;
+        CustomerConstantHashCode that = (CustomerConstantHashCode) o;
         return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return new Random().nextInt(11);
+        return 8;
     }
+
+
 }
