@@ -24,6 +24,13 @@ public class OnlyOneController {
     @Autowired
     private CategorySearchService categorySearchService;
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET) //oznaczamy metody reagujące na requesty
+    public String loginForm(Model model) { //model to element przekazujacy dane miedzy frontem a aplikacją
+        model.addAttribute("form", new UserLoginDTO());
+
+        return "loginForm";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginEffect(UserLoginDTO userLoginDTO, Model model) {
 
@@ -37,24 +44,28 @@ public class OnlyOneController {
 
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET) //oznaczamy metody reagujące na requesty
-    public String loginForm(Model model) { //model to element przekazujacy dane miedzy frontem a aplikacją
-        model.addAttribute("form", new UserLoginDTO());
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String regigisterForm(Model model) {
+        model.addAttribute("countries", Countries.values());
+        model.addAttribute("form", new UserRegistrationDTO());
+        return "registerForm";
 
-        return "loginForm";
     }
 
-    public String registerEffects(UserRegistrationDTO userRegistrationDTO) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registerEffects(UserRegistrationDTO userRegistrationDTO, Model model) {
 
         Map<String, String> errorsMap = userValidationService.validateUser(userRegistrationDTO);
 
         if (errorsMap.isEmpty()) {
             userRegistrationService.registerUser(userRegistrationDTO);
-            return "ok";
+            return "registerEffect";
         } else {
-            return "nie ok";
+            model.addAllAttributes(errorsMap);
+            model.addAttribute("countries", Countries.values());
+            model.addAttribute("form", new UserRegistrationDTO());
+            return "registerForm";
         }
-
     }
 
     public String categories(String searchText) {
