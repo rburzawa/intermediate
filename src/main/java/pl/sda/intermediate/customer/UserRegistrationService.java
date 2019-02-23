@@ -39,7 +39,7 @@ public class UserRegistrationService {
         userAddress.setCountry(userRegistrationDTO.getCountry());
         userAddress.setStreet(userRegistrationDTO.getStreet());
         userAddress.setZipCode(userRegistrationDTO.getZipCode());
-        user.setUserAdress(userAddress);
+        user.setUserAddress(userAddress);
         return user;
     }
 

@@ -57,20 +57,22 @@ public class OnlyOneController {
 
         Map<String, String> errorsMap = userValidationService.validateUser(userRegistrationDTO);
 
+        model.addAttribute("form", userRegistrationDTO);
         if (errorsMap.isEmpty()) {
             userRegistrationService.registerUser(userRegistrationDTO);
             return "registerEffect";
         } else {
             model.addAllAttributes(errorsMap);
             model.addAttribute("countries", Countries.values());
-            model.addAttribute("form", new UserRegistrationDTO());
             return "registerForm";
         }
     }
 
-    public String categories(String searchText) {
+    @RequestMapping(value ="/categories")
+    public String categories(String searchText, Model model) {
 
         List<CategoryDTO> categories = categorySearchService.filterCategories(searchText);
+        model.addAttribute("catsdata", categories);
         return "catspage";
     }
 }

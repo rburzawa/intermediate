@@ -3,7 +3,9 @@ package pl.sda.intermediate.category;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CategorySearchService {
@@ -19,13 +21,24 @@ public class CategorySearchService {
         for (Category category : categories) {
             resultList.add(buildCategoryDTO(category));
         }
-        for (CategoryDTO categoryDTO : resultList) { //TODO create Map
+
+        Map<Integer, CategoryDTO> resultMap = new HashMap<>();
+        for (CategoryDTO categoryDTO : resultList) {
+            resultMap.put(categoryDTO.getId(), categoryDTO);
+        }
+
+        /*for (CategoryDTO categoryDTO : resultList) { //TODO create Map
             categoryDTO.setParentCat(
                     resultList.stream()
                             .filter(s -> s.getId().equals(categoryDTO.getParentId()))
                             .findFirst()
                             .orElse(null));
+        }*/
+
+        for (CategoryDTO categoryDTO : resultList) { //TODO Map created
+            categoryDTO.setParentCat(resultMap.get(categoryDTO.getParentId()));
         }
+
         for (CategoryDTO categoryDTO : resultList) {
             if (input != null && !input.trim().isEmpty() && categoryDTO.getName().equals(input.trim())) {
                 categoryDTO.getCategoryState().setOpen(true);
