@@ -47,25 +47,27 @@ public class CompletableFutureExample {
 
     }
 
-    @Test //użycie puli wątków
+    @Test
+        //użycie puli wątków
     void completableFutures() {
+
         CompletableFuture<String> descrCF = CompletableFuture
                 .supplyAsync(() -> downloadDescription()) //coś zostanie kiedyś ściągnięte
-                .thenApplyAsync(s->transform(s, stringToString)); //wykonaj coś na tym, co zostanie kiedyś sciągnięte
+                .thenApplyAsync(s -> transform(s, stringToString)); //wykonaj coś na tym, co zostanie kiedyś sciągnięte
 
         CompletableFuture<String> photosCF = CompletableFuture
                 .supplyAsync(() -> downloadPhotos())
-                .thenApplyAsync(s->transform(s, stringToString));
+                .thenApplyAsync(s -> transform(s, stringToString));
 
         CompletableFuture<String> priceCF = CompletableFuture
                 .supplyAsync(() -> downloadPrice()) //coś zostanie kiedyś ściągnięte
-                .thenApplyAsync(s->transform(s, bigDecimalToString));
+                .thenApplyAsync(s -> transform(s, bigDecimalToString));
 
         CompletableFuture<String> dataCF = CompletableFuture
                 .supplyAsync(() -> downloadData()) //coś zostanie kiedyś ściągnięte
-                .thenApplyAsync(s->transform(s, longToString));
+                .thenApplyAsync(s -> transform(s, longToString));
 
-        List<CompletableFuture<String>> cFS = Stream.of(descrCF,photosCF,priceCF,dataCF).collect(Collectors.toList());
+        List<CompletableFuture<String>> cFS = Stream.of(descrCF, photosCF, priceCF, dataCF).collect(Collectors.toList());
 
         for (CompletableFuture<String> cF : cFS) {
             cF.join(); //czekamy na wykonanie każdego z zadań
